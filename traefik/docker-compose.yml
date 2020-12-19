@@ -14,13 +14,9 @@ services:
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
       - --log.level=ERROR
-      #- --certificatesresolvers.leresolver.acme.httpchallenge=true
-      #- --certificatesresolvers.leresolver.acme.email=your-email #Set your email address here, is for the generation of SSL certificates with Let's Encrypt. 
-      #- --certificatesresolvers.leresolver.acme.storage=./acme.json
-      #- --certificatesresolvers.leresolver.acme.httpchallenge.entrypoint=web
     ports:
       - "80:80"
-      - "8080:8080"  # The Web UI (enabled by --api)
+      - "8080:8080"  # The Web UI (enabled by --api.dashboard=true)
       - "443:443"
     networks:
       - admin
@@ -29,7 +25,6 @@ services:
       - frontend
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      #- "./acme.json:/acme.json"
       - "./config.toml:/config.toml"
       - "./certs:/certs"
     labels:
@@ -56,10 +51,9 @@ services:
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.service=frontendService"
       - "traefik.http.services.frontendService.loadbalancer.server.port=9000"
-      #- "traefik.http.routers.frontend.tls.certresolver=leresolver"
 
-  whoami: # Testing service
-    image: traefik/whoami  # A container for testing, that exposes an API to show it's IP address
+  whoami: # Testing container
+    image: traefik/whoami
     hostname: whoami.localhost
     container_name: whoami
     restart: always
@@ -83,4 +77,4 @@ networks:
   backend:
     name: backend
   php:
-    name: php
+    name: webserver
