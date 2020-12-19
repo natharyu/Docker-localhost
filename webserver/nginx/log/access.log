@@ -1,0 +1,7 @@
+172.27.0.2 - - [19/Dec/2020:14:13:05 +0000] "GET / HTTP/1.1" 200 132 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0" "172.29.0.1"
+172.27.0.2 - - [19/Dec/2020:14:13:06 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0" "172.29.0.1"
+172.27.0.2 - - [19/Dec/2020:14:13:07 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0" "172.29.0.1"
+172.27.0.2 - - [19/Dec/2020:14:13:13 +0000] "GET /index.php HTTP/1.1" 200 18 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0" "172.29.0.1"
+172.27.0.2 - - [19/Dec/2020:14:13:39 +0000] "GET / HTTP/1.1" 403 146 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0" "172.29.0.1"
+172.27.0.2 - - [19/Dec/2020:14:13:51 +0000] "GET / HTTP/1.1" 403 146 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0" "172.29.0.1"
+172.27.0.2 - - [19/Dec/2020:14:34:46 +0000] "GET / HTTP/1.1" 200 132 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0" "172.29.0.1"

@@ -1,0 +1,2 @@
+2020/12/19 14:13:39 [error] 30#30: *1 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.27.0.2, server: localhost, request: "GET / HTTP/1.1", host: "webserver.localhost"
+2020/12/19 14:13:51 [error] 30#30: *1 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.27.0.2, server: localhost, request: "GET / HTTP/1.1", host: "webserver.localhost"

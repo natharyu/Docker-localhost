@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+    nginx:
+      image: nginx:stable-alpine
+      container_name: nginx
+      volumes:
+        - "./nginx/www:/usr/share/nginx/html:ro" #Your webserver root folder
+        - "./nginx/log:/var/log/nginx" #Access to nginx container logs
+        - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+      networks: #Comment if not use my traefik docker-compose file
+        - webserver #Comment if not use my traefik docker-compose file
+      labels: #Comment if not use my traefik docker-compose file
+        - "traefik.enable=true" #Comment if not use my traefik docker-compose file
+        - "traefik.http.routers.nginx.rule=Host(`webserver.localhost`)" #Comment if not use my traefik docker-compose file
+        - "traefik.http.routers.nginx.entrypoints=websecure" #Comment if not use my traefik docker-compose file
+        - "traefik.http.routers.nginx.tls=true" #Comment if not use my traefik docker-compose file
+      #ports: #uncomment if not use my traefik docker-compose file
+        #- 80:80 #Uncomment if not use my traefik docker-compose file
+networks:
+  webserver:
+    name: webserver
+    external: true
