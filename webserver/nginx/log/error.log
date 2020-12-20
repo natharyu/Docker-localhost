@@ -1,0 +1,1 @@
+2020/12/20 15:05:34 [error] 30#30: *1 open() "/srv/www/favicon.ico" failed (2: No such file or directory), client: 172.29.0.2, server: webserver.localhost, request: "GET /favicon.ico HTTP/1.1", host: "webserver.localhost", referrer: "https://webserver.localhost/"

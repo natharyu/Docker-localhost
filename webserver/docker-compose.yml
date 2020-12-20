@@ -7,9 +7,9 @@ services:
       depends_on:
         - php-fpm
       volumes:
-        - "./nginx/www:/srv/www:ro" # Your webserver root folder
-        - "./nginx/log:/var/log/nginx" # Access to nginx container logs
-        - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+        - ./nginx/www:/srv/www:ro # Your webserver root folder
+        - ./nginx/log:/var/log/nginx # Access to nginx container logs
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       networks: # Comment if not use my traefik docker-compose file
         - traefik # Comment if not use my traefik docker-compose file
         - webserver
@@ -20,16 +20,48 @@ services:
         - "traefik.http.routers.nginx.tls=true" # Comment if not use my traefik docker-compose file
       #ports: # Uncomment if not use my traefik docker-compose file
       #  - 80:80 # Uncomment if not use my traefik docker-compose file
+
     php-fpm:
-      image: php:fpm-alpine
+      build: ./php-fpm
       container_name: php-fpm
       volumes:
-        - "./nginx/www:/srv/www:ro"
+        - ./nginx/www:/srv/www:ro
       networks:
         - webserver
+      
+    db:
+      image: postgres:alpine
+      container_name: db
+      volumes:
+        - ./db:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+      networks:
+        - webserver
+      environment:
+        POSTGRES_USER: user
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: webserver_db
+    
+    adminer:
+      image: adminer
+      container_name: adminer
+      restart: always
+      depends_on: 
+        - db
+      labels: # Comment if not use my traefik docker-compose file
+        - "traefik.enable=true" # Comment if not use my traefik docker-compose file
+        - "traefik.http.routers.adminer.rule=Host(`webserverdb.localhost`)" # Comment if not use my traefik docker-compose file
+        - "traefik.http.routers.adminer.entrypoints=websecure" # Comment if not use my traefik docker-compose file
+        - "traefik.http.routers.adminer.tls=true" # Comment if not use my traefik docker-compose file
+      networks:
+        - traefik
+        - webserver
+
 networks:
   traefik:
     name: traefik
     external: true
   webserver:
     name: webserver
+    driver: bridge
