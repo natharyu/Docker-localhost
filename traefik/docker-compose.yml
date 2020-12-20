@@ -4,6 +4,7 @@ services:
   traefik:
     container_name: traefik
     image: traefik:v2.3.4
+    restart: unless-stopped
     command:
       - --api.dashboard=true
       - --api.insecure=true
@@ -19,9 +20,9 @@ services:
       - "8080:8080"  # The Web UI (enabled by --api.dashboard=true)
       - "443:443"
     networks:
+      - traefik
       - admin
       - backend
-      - php
       - frontend
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -76,5 +77,6 @@ networks:
     name: frontend
   backend:
     name: backend
-  php:
-    name: webserver
+  traefik:
+    name: traefik
+    external: true
